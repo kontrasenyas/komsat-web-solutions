@@ -20,12 +20,13 @@ export const Hero = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             Empowering Businesses with Cutting-Edge IT Solutions
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-8">
-            Transform your business with innovative technology solutions tailored to your needs
-          </p>
-          <p className="text-lg md:text-xl text-gray-200 mb-8">
+          <p className="text-lg md:text-xl text-white mb-8">
             Peeking into the Future of IT
           </p>
+          <p className="text-lg md:text-xl text-white mb-8">
+            Transform your business with innovative technology solutions tailored to your needs
+          </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg">Discover Our Services</Button>
           </div>
