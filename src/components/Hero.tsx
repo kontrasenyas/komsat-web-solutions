@@ -23,7 +23,9 @@ export const Hero = () => {
           <p className="text-lg md:text-xl text-gray-200 mb-8">
             Transform your business with innovative technology solutions tailored to your needs
           </p>
-          <p>Peeking into the Future of IT</p>
+          <p className="text-lg md:text-xl text-gray-200 mb-8">
+            Peeking into the Future of IT
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg">Discover Our Services</Button>
             <Button size="lg" variant="outline" className="text-white border-white hover:text-white">
