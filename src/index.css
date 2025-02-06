@@ -10,19 +10,19 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 199 89% 48%;
+    --primary: 117 63% 41%;
     --primary-foreground: 210 40% 98%;
     --secondary: 215 32% 17%;
     --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 199 84% 55%;
+    --accent: 117 63% 41%;
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 199 89% 48%;
+    --ring: 117 63% 41%;
     --radius: 0.5rem;
   }
 }
@@ -37,7 +37,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(30, 41, 59, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(50, 170, 39, 0.15) 0%, rgba(30, 41, 59, 0.15) 100%);
 }
 
 .service-card {
