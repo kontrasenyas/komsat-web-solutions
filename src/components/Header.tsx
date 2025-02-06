@@ -10,10 +10,11 @@ export const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold text-primary">Komsat Solutions</div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <a href="#home" className="text-secondary hover:text-primary transition-colors">Home</a>
+            <a href="#about" className="text-secondary hover:text-primary transition-colors">About</a>
             <a href="#services" className="text-secondary hover:text-primary transition-colors">Services</a>
             <a href="#contact" className="text-secondary hover:text-primary transition-colors">Contact</a>
             <Button>Get a Free Consultation</Button>
