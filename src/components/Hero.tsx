@@ -28,9 +28,6 @@ export const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg">Discover Our Services</Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:text-white">
-              Schedule a Call
-            </Button>
           </div>
         </div>
       </div>
