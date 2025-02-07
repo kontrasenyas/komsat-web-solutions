@@ -34,7 +34,7 @@ export const Services = () => {
   return (
     <section id="services" className="py-20 bg-muted/50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div data-fade className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             We offer a comprehensive range of IT solutions to help your business thrive in the digital age
@@ -45,6 +45,7 @@ export const Services = () => {
           {services.map((service, index) => (
             <div 
               key={service.title} 
+              data-fade
               className="bg-white p-6 rounded-lg service-card animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >

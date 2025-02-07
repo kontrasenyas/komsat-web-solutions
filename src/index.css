@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,4 +43,14 @@
 
 .service-card {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+[data-fade] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+[data-fade].animate-fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
