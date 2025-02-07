@@ -1,3 +1,4 @@
+
 import { Button } from "./ui/button";
 
 export const Hero = () => {
@@ -12,11 +13,10 @@ export const Hero = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             Empowering Businesses with Cutting-Edge IT Solutions
           </h1>

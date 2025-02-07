@@ -1,3 +1,4 @@
+
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -18,14 +19,14 @@ export const Contact = () => {
     <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
             <p className="text-muted-foreground">
               Ready to transform your business? Let's talk about your project
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in">
             <div>
               <Input placeholder="Your Name" required />
             </div>
