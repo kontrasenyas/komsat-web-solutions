@@ -1,82 +1,75 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Code, Database, Server, Shield, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const services = [
-  {
-    title: "Custom Software Development",
-    description: "Tailored software solutions to streamline your business operations",
-    icon: Code,
-  },
-  {
-    title: "Cloud Computing Solutions",
-    description: "Secure and scalable cloud infrastructure for your growing needs",
-    icon: Database,
-  },
-  {
-    title: "Cybersecurity & Data Protection",
-    description: "Comprehensive security solutions to protect your digital assets",
-    icon: Shield,
-  },
-  {
-    title: "IT Consulting & Support",
-    description: "Expert guidance and support for your technology initiatives",
-    icon: Users,
-  },
-  {
-    title: "Web & Mobile Development",
-    description: "Creating powerful web and mobile applications",
-    icon: Server,
-  },
+  { title: "Custom Software Development", description: "Tailored software solutions.", icon: Code },
+  { title: "Cloud Computing Solutions", description: "Secure and scalable infrastructure.", icon: Database },
+  { title: "Cybersecurity & Data Protection", description: "Comprehensive security solutions.", icon: Shield },
+  { title: "IT Consulting & Support", description: "Expert guidance for your tech needs.", icon: Users },
+  { title: "Web & Mobile Development", description: "Building powerful applications.", icon: Server },
 ];
 
 export const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const headerRef = useIntersectionObserver<HTMLDivElement>(() => setIsVisible(true));
   const [isCardsVisible, setIsCardsVisible] = useState(false);
-  const cardsContainerRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardsVisible(true), {
-    threshold: 0.1
+
+  // Monitor header visibility
+  const headerRef = useIntersectionObserver<HTMLDivElement>(() => {
+    setIsVisible(true);
   });
-  
+
+  // Monitor cards visibility
+  const cardsContainerRef = useIntersectionObserver<HTMLDivElement>(() => {
+    setIsCardsVisible(true);
+  }, { threshold: 0.2 });
+
+  // Debugging: Force visibility if observer fails
+  useEffect(() => {
+    setTimeout(() => {
+      if (!isVisible) setIsVisible(true);
+      if (!isCardsVisible) setIsCardsVisible(true);
+    }, 2000);
+  }, [isVisible, isCardsVisible]);
+
   return (
     <section id="services" className="py-20 bg-muted/50">
       <div className="container mx-auto px-4">
-        <div 
+        {/* Header */}
+        <div
           ref={headerRef}
-          data-fade 
-          className={`text-center mb-16 ${isVisible ? 'animate-fade-in' : ''}`}
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            We offer a comprehensive range of IT solutions to help your business thrive in the digital age
+            We offer comprehensive IT solutions to help your business thrive.
           </p>
         </div>
-        
-        <div 
+
+        {/* Cards */}
+        <div
           ref={cardsContainerRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {services.map((service, index) => (
-            <div 
-              key={service.title}
-              data-fade
-              className={`bg-white p-6 rounded-lg service-card transition-all duration-500 ease-out transform ${
-                isCardsVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-8'
-              }`}
-              style={{ 
-                transitionDelay: `${index * 150}ms`
-              }}
-            >
-              <service.icon className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-muted-foreground mb-4">{service.description}</p>
-              <Button variant="outline" className="w-full">Learn More</Button>
-            </div>
-          ))}
+          {services.map((service, index) => {
+            const IconComponent = service.icon; // Ensure correct rendering
+
+            return (
+              <div
+                key={service.title}
+                className={`bg-white p-6 rounded-lg shadow-md transition-all duration-700 transform ${isCardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <IconComponent className="w-12 h-12 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
+                <Button variant="outline" className="w-full">Learn More</Button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
