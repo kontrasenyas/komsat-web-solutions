@@ -1,7 +1,12 @@
 
+import { useState } from "react";
 import { Button } from "./ui/button";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useIntersectionObserver(() => setIsVisible(true));
+
   return (
     <section 
       id="home" 
@@ -16,7 +21,11 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-black/50"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div data-fade className="max-w-3xl mx-auto text-center animate-fade-in">
+        <div 
+          ref={heroRef}
+          data-fade 
+          className={`max-w-3xl mx-auto text-center ${isVisible ? 'animate-fade-in' : ''}`}
+        >
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             Empowering Businesses with Cutting-Edge IT Solutions
           </h1>
