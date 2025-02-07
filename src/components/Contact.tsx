@@ -11,8 +11,8 @@ export const Contact = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   
-  const headerRef = useIntersectionObserver(() => setIsHeaderVisible(true));
-  const formRef = useIntersectionObserver(() => setIsFormVisible(true));
+  const headerRef = useIntersectionObserver<HTMLDivElement>(() => setIsHeaderVisible(true));
+  const formRef = useIntersectionObserver<HTMLFormElement>(() => setIsFormVisible(true));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
