@@ -35,6 +35,8 @@ const services = [
 export const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const headerRef = useIntersectionObserver<HTMLDivElement>(() => setIsVisible(true));
+  const [isCardsVisible, setIsCardsVisible] = useState(false);
+  const cardsContainerRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardsVisible(true));
   
   return (
     <section id="services" className="py-20 bg-muted/50">
@@ -50,29 +52,26 @@ export const Services = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const [isCardVisible, setIsCardVisible] = useState(false);
-            const cardRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardVisible(true));
-
-            return (
-              <div 
-                key={service.title} 
-                ref={cardRef}
-                data-fade
-                className={`bg-white p-6 rounded-lg service-card ${isCardVisible ? 'animate-fade-in' : ''}`}
-                style={{ 
-                  animationDelay: `${index * 0.1}s`,
-                  opacity: isCardVisible ? undefined : 0
-                }}
-              >
-                <service.icon className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground mb-4">{service.description}</p>
-                <Button variant="outline" className="w-full">Learn More</Button>
-              </div>
-            );
-          })}
+        <div 
+          ref={cardsContainerRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {services.map((service, index) => (
+            <div 
+              key={service.title}
+              data-fade
+              className={`bg-white p-6 rounded-lg service-card ${isCardsVisible ? 'animate-fade-in' : ''}`}
+              style={{ 
+                animationDelay: `${index * 0.1}s`,
+                opacity: isCardsVisible ? undefined : 0
+              }}
+            >
+              <service.icon className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <p className="text-muted-foreground mb-4">{service.description}</p>
+              <Button variant="outline" className="w-full">Learn More</Button>
+            </div>
+          ))}
         </div>
       </div>
     </section>
