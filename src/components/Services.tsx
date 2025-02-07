@@ -59,7 +59,7 @@ export const Services = () => {
             return (
               <div
                 key={service.title}
-                className={`bg-white p-6 rounded-lg shadow-md transition-all duration-700 transform ${isCardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                className={`bg-white p-6 rounded-lg service-card shadow-md transition-all duration-700 ease-out transform ${isCardsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
