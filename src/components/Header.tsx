@@ -32,7 +32,7 @@ export const Header = () => {
             <a href="#home" className="text-secondary hover:text-primary transition-colors">Home</a>
             <a href="#services" className="text-secondary hover:text-primary transition-colors">Services</a>
             <a href="#contact" className="text-secondary hover:text-primary transition-colors">Contact</a>
-            <Button className="w-full">Get a Free Consultation</Button>
+            <Button className="w-full">Get a Free Consultation!</Button>
           </nav>
         )}
       </div>
