@@ -36,7 +36,9 @@ export const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const headerRef = useIntersectionObserver<HTMLDivElement>(() => setIsVisible(true));
   const [isCardsVisible, setIsCardsVisible] = useState(false);
-  const cardsContainerRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardsVisible(true));
+  const cardsContainerRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardsVisible(true), {
+    threshold: 0.1
+  });
   
   return (
     <section id="services" className="py-20 bg-muted/50">
@@ -60,10 +62,13 @@ export const Services = () => {
             <div 
               key={service.title}
               data-fade
-              className={`bg-white p-6 rounded-lg service-card ${isCardsVisible ? 'animate-fade-in' : ''}`}
+              className={`bg-white p-6 rounded-lg service-card transition-all duration-500 ease-out transform ${
+                isCardsVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-8'
+              }`}
               style={{ 
-                animationDelay: `${index * 0.1}s`,
-                opacity: isCardsVisible ? undefined : 0
+                transitionDelay: `${index * 150}ms`
               }}
             >
               <service.icon className="w-12 h-12 text-primary mb-4" />
