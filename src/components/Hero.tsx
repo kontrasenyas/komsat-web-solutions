@@ -5,7 +5,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const heroRef = useIntersectionObserver(() => setIsVisible(true));
+  const heroRef = useIntersectionObserver<HTMLDivElement>(() => setIsVisible(true));
 
   return (
     <section 

@@ -34,7 +34,7 @@ const services = [
 
 export const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const headerRef = useIntersectionObserver(() => setIsVisible(true));
+  const headerRef = useIntersectionObserver<HTMLDivElement>(() => setIsVisible(true));
   
   return (
     <section id="services" className="py-20 bg-muted/50">
@@ -53,7 +53,7 @@ export const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const [isCardVisible, setIsCardVisible] = useState(false);
-            const cardRef = useIntersectionObserver(() => setIsCardVisible(true));
+            const cardRef = useIntersectionObserver<HTMLDivElement>(() => setIsCardVisible(true));
 
             return (
               <div 
