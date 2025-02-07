@@ -25,23 +25,13 @@ export const Services = () => {
     setIsCardsVisible(true);
   }, { threshold: 0.2 });
 
-  // Debugging: Force visibility if observer fails
-  useEffect(() => {
-    setTimeout(() => {
-      if (!isVisible) setIsVisible(true);
-      if (!isCardsVisible) setIsCardsVisible(true);
-    }, 2000);
-  }, [isVisible, isCardsVisible]);
-
   return (
     <section id="services" className="py-20 bg-muted/50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div
           ref={headerRef}
-          className={`text-center mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-        >
+          className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'animate-fade-in' : ''}`}>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             We offer comprehensive IT solutions to help your business thrive.
