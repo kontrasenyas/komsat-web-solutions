@@ -3,7 +3,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/2355563a-a07c-41cb-b7e5-c3689c6b67e2
+**URL**: https://komsat-web-solutions.fly.dev/
 
 ## Database Migrations
 
