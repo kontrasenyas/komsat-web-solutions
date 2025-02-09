@@ -1,3 +1,4 @@
+
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -13,10 +14,10 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#home" className="text-secondary hover:text-primary transition-colors">Home</a>
-            <a href="#about" className="text-secondary hover:text-primary transition-colors">About</a>
-            <a href="#services" className="text-secondary hover:text-primary transition-colors">Services</a>
-            <a href="#contact" className="text-secondary hover:text-primary transition-colors">Contact</a>
+            <a href="#home" className="relative text-secondary hover:text-primary transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-primary after:left-0 after:-bottom-1 after:rounded-full after:origin-left after:scale-x-0 after:transition-transform hover:after:scale-x-100">Home</a>
+            <a href="#about" className="relative text-secondary hover:text-primary transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-primary after:left-0 after:-bottom-1 after:rounded-full after:origin-left after:scale-x-0 after:transition-transform hover:after:scale-x-100">About</a>
+            <a href="#services" className="relative text-secondary hover:text-primary transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-primary after:left-0 after:-bottom-1 after:rounded-full after:origin-left after:scale-x-0 after:transition-transform hover:after:scale-x-100">Services</a>
+            <a href="#contact" className="relative text-secondary hover:text-primary transition-colors after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-primary after:left-0 after:-bottom-1 after:rounded-full after:origin-left after:scale-x-0 after:transition-transform hover:after:scale-x-100">Contact</a>
             <Button>Get a Free Consultation</Button>
           </nav>
 
