@@ -1,8 +1,21 @@
+
 # Welcome to your Lovable project
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/2355563a-a07c-41cb-b7e5-c3689c6b67e2
+
+## Database Migrations
+
+This project uses Supabase for the database. To set up the database, you need to run the migrations in the `supabase/migrations` directory.
+
+```sh
+# Step 1: Apply the migrations using Supabase CLI
+supabase migration up
+
+# Alternative: You can manually run the SQL files in the Supabase dashboard SQL editor
+# Copy the contents of each file in supabase/migrations and execute them in order
+```
 
 ## How can I edit this code?
 
