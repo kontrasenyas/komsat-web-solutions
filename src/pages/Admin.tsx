@@ -25,7 +25,27 @@ interface Message {
 const Admin = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAuthenticated(!!session);
+      setAuthChecking(false);
+      
+      if (!session) {
+        toast({
+          variant: "destructive",
+          title: "Authentication Required",
+          description: "Please log in to access the admin panel.",
+        });
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   const fetchMessages = async () => {
     try {
@@ -47,6 +67,12 @@ const Admin = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchMessages();
+    }
+  }, [isAuthenticated]);
 
   const markAsRead = async (id: string) => {
     try {
@@ -77,9 +103,24 @@ const Admin = () => {
     }
   };
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
+  if (authChecking) {
+    return (
+      <div className="container mx-auto p-8">
+        <div className="text-center">Checking authentication...</div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container mx-auto p-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
+          <p>Please log in to access the admin panel.</p>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
