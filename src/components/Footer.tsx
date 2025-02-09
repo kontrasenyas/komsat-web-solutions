@@ -59,7 +59,7 @@ export const Footer = () => {
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cloud Solutions</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cybersecurity</a>
+                <a href="#" className="text-gray-300 hover:text-primary transition-colors">AI Solutions</a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">IT Consulting</a>
@@ -73,7 +73,7 @@ export const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="text-primary shrink-0 mt-1" size={20} />
-                <p className="text-gray-300">123 Business Street, Tech City, TC 12345</p>
+                <p className="text-gray-300">Cavite, Philippines</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="text-primary shrink-0" size={20} />
