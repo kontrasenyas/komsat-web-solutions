@@ -75,8 +75,13 @@ This project is built with .
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/2355563a-a07c-41cb-b7e5-c3689c6b67e2) and click on Share -> Publish.
+This was deployed automatically using fly.io
 
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+
+## How to access admin panel?
+
+Go to supabase dashboard > authentication > click user > send email login
