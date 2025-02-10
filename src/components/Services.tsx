@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
-import { Code, Database, Server, Shield, Users } from "lucide-react";
+
+import { useState } from "react";
+import { Brain, Code, Database, Server, Shield, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { ServiceDetailsModal } from "./ServiceDetailsModal";
 
 const services = [
+  { title: "AI Solutions", description: "Cutting-edge artificial intelligence integration.", icon: Brain },
   { title: "Custom Software Development", description: "Tailored software solutions.", icon: Code },
   { title: "Cloud Computing Solutions", description: "Secure and scalable infrastructure.", icon: Database },
   { title: "Cybersecurity & Data Protection", description: "Comprehensive security solutions.", icon: Shield },
@@ -14,6 +17,7 @@ const services = [
 export const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isCardsVisible, setIsCardsVisible] = useState(false);
+  const [selectedService, setSelectedService] = useState<(typeof services)[0] | null>(null);
 
   // Monitor header visibility
   const headerRef = useIntersectionObserver<HTMLDivElement>(() => {
@@ -44,7 +48,7 @@ export const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {services.map((service, index) => {
-            const IconComponent = service.icon; // Ensure correct rendering
+            const IconComponent = service.icon;
 
             return (
               <div
@@ -56,12 +60,26 @@ export const Services = () => {
                 <IconComponent className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-muted-foreground mb-4">{service.description}</p>
-                <Button variant="outline" className="w-full">Learn More</Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => setSelectedService(service)}
+                >
+                  Learn More
+                </Button>
               </div>
             );
           })}
         </div>
       </div>
+
+      {selectedService && (
+        <ServiceDetailsModal
+          isOpen={!!selectedService}
+          onClose={() => setSelectedService(null)}
+          service={selectedService}
+        />
+      )}
     </section>
   );
 };
