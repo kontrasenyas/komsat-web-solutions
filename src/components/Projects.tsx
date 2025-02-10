@@ -4,34 +4,72 @@ import { Brain, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { ProjectDetailsModal } from "./ProjectDetailsModal";
 
 const projects = [
   {
     title: "AI Chatbot",
     description: "An intelligent conversational AI assistant powered by machine learning.",
     icon: Brain,
-    link: "#",
-    tags: ["AI", "NLP", "Python"]
+    tags: ["AI", "NLP", "Python"],
+    details: {
+      overview: "A sophisticated chatbot that leverages natural language processing to provide intelligent responses and assist users with various tasks.",
+      features: [
+        "Natural language understanding",
+        "Context-aware responses",
+        "Multi-language support",
+        "Integration with external APIs",
+        "Customizable personality"
+      ],
+      technologies: ["Python", "TensorFlow", "NLTK", "FastAPI", "Docker"],
+      demoUrl: "https://demo.example.com",
+      githubUrl: "https://github.com/example/ai-chatbot"
+    }
   },
   {
     title: "E-Commerce Website",
     description: "A modern e-commerce platform with seamless user experience.",
     icon: Globe,
-    link: "#",
-    tags: ["React", "Node.js", "MongoDB"]
+    tags: ["React", "Node.js", "MongoDB"],
+    details: {
+      overview: "A full-featured e-commerce platform built with modern technologies, offering a smooth shopping experience.",
+      features: [
+        "Product catalog with search and filters",
+        "Shopping cart and wishlist",
+        "Secure payment integration",
+        "Order tracking",
+        "Admin dashboard"
+      ],
+      technologies: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
+      demoUrl: "https://shop.example.com",
+      githubUrl: "https://github.com/example/ecommerce"
+    }
   },
   {
     title: "Corporate Website",
     description: "A professional business website with dynamic content management.",
     icon: Globe,
-    link: "#",
-    tags: ["Next.js", "TypeScript", "Tailwind"]
+    tags: ["Next.js", "TypeScript", "Tailwind"],
+    details: {
+      overview: "A modern corporate website featuring dynamic content management and responsive design.",
+      features: [
+        "Dynamic content management",
+        "Blog system",
+        "Contact forms",
+        "Newsletter integration",
+        "Analytics dashboard"
+      ],
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"],
+      demoUrl: "https://corporate.example.com",
+      githubUrl: "https://github.com/example/corporate-site"
+    }
   }
 ];
 
 export const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isCardsVisible, setIsCardsVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
 
   const headerRef = useIntersectionObserver<HTMLDivElement>(() => {
     setIsVisible(true);
@@ -86,7 +124,11 @@ export const Projects = () => {
                       </span>
                     ))}
                   </div>
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => setSelectedProject(project)}
+                  >
                     View Project
                   </Button>
                 </CardContent>
@@ -95,6 +137,14 @@ export const Projects = () => {
           })}
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectDetailsModal
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          project={selectedProject}
+        />
+      )}
     </section>
   );
 };
