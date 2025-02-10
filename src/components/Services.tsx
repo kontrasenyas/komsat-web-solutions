@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Brain, Code, Database, Server, Shield, Users } from "lucide-react";
 import { Button } from "./ui/button";
@@ -83,3 +82,5 @@ export const Services = () => {
     </section>
   );
 };
+
+export { services };

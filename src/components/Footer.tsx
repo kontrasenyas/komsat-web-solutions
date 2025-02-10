@@ -1,8 +1,12 @@
-
+import { useState } from "react";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
+import { ServiceDetailsModal } from "./ServiceDetailsModal";
+import { services } from "./Services";
 
 export const Footer = () => {
+  const [selectedService, setSelectedService] = useState<(typeof services)[0] | null>(null);
+
   return (
     <footer className="bg-secondary text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -55,24 +59,16 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">AI Solutions</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Custom Software</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cloud Solutions</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cybersecurity</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">IT Consulting</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Web Development</a>
-              </li>
+              {services.map((service) => (
+                <li key={service.title}>
+                  <button 
+                    className="text-gray-300 hover:text-primary transition-colors"
+                    onClick={() => setSelectedService(service)}
+                  >
+                    {service.title}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -104,6 +100,14 @@ export const Footer = () => {
           </p>
         </div>
       </div>
+
+      {selectedService && (
+        <ServiceDetailsModal
+          isOpen={!!selectedService}
+          onClose={() => setSelectedService(null)}
+          service={selectedService}
+        />
+      )}
     </footer>
   );
 };
