@@ -1,11 +1,12 @@
 
-import { useState, useEffect } from "react";
-import { Code, Database, Server, Shield, Users } from "lucide-react";
+import { useState } from "react";
+import { Brain, Code, Database, Server, Shield, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { ServiceDetailsModal } from "./ServiceDetailsModal";
 
 const services = [
+  { title: "AI Solutions", description: "Cutting-edge artificial intelligence integration.", icon: Brain },
   { title: "Custom Software Development", description: "Tailored software solutions.", icon: Code },
   { title: "Cloud Computing Solutions", description: "Secure and scalable infrastructure.", icon: Database },
   { title: "Cybersecurity & Data Protection", description: "Comprehensive security solutions.", icon: Shield },
