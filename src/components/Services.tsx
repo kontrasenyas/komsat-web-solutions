@@ -11,7 +11,7 @@ const services = [
   { title: "Cloud Computing Solutions", description: "Secure and scalable infrastructure.", icon: Database },
   { title: "Cybersecurity & Data Protection", description: "Comprehensive security solutions.", icon: Shield },
   { title: "IT Consulting & Support", description: "Expert guidance for your tech needs.", icon: Users },
-  { title: "Web & Mobile Development", description: "Building powerful applications.", icon: Server },
+  { title: "Web Development", description: "Building powerful applications.", icon: Server },
 ];
 
 export const Services = () => {

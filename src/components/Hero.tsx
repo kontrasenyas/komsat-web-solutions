@@ -37,7 +37,7 @@ export const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">Discover Our Services</Button>
+            <Button onClick={() => window.location.hash = 'services'} size="lg">Discover Our Services</Button>
           </div>
         </div>
       </div>

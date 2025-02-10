@@ -43,6 +43,9 @@ export const Footer = () => {
                 <a href="#services" className="text-gray-300 hover:text-primary transition-colors">Services</a>
               </li>
               <li>
+                <a href="#projects" className="text-gray-300 hover:text-primary transition-colors">Projects</a>
+              </li>
+              <li>
                 <a href="#contact" className="text-gray-300 hover:text-primary transition-colors">Contact</a>
               </li>
             </ul>
@@ -53,16 +56,22 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2">
               <li>
+                <a href="#" className="text-gray-300 hover:text-primary transition-colors">AI Solutions</a>
+              </li>
+              <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">Custom Software</a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cloud Solutions</a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary transition-colors">AI Solutions</a>
+                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Cybersecurity</a>
               </li>
               <li>
                 <a href="#" className="text-gray-300 hover:text-primary transition-colors">IT Consulting</a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-primary transition-colors">Web Development</a>
               </li>
             </ul>
           </div>
@@ -77,11 +86,11 @@ export const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="text-primary shrink-0" size={20} />
-                <p className="text-gray-300">+63 (555) 123-4567</p>
+                <p className="text-gray-300">+63 917 712 9286</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="text-primary shrink-0" size={20} />
-                <p className="text-gray-300">info@komsatsolutions.com</p>
+                <p className="text-gray-300">info@komsat.com</p>
               </div>
               <Button className="w-full">Get in Touch</Button>
             </div>
