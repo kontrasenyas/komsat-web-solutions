@@ -10,32 +10,49 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      if (isLogin) {
+        // Login
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Success",
-        description: "Logged in successfully",
-      });
+        toast({
+          title: "Success",
+          description: "Logged in successfully",
+        });
 
-      navigate("/admin");
+        navigate("/admin");
+      } else {
+        // Sign up
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Success",
+          description: "Account created successfully. Please check your email for verification.",
+        });
+      }
     } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: error.message || "An error occurred during login",
+        description: error.message || `An error occurred during ${isLogin ? 'login' : 'signup'}`,
       });
     } finally {
       setLoading(false);
@@ -46,13 +63,15 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="max-w-md w-full p-8 space-y-6 bg-card rounded-lg shadow-lg">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Admin Login</h1>
+          <h1 className="text-2xl font-bold">Admin {isLogin ? "Login" : "Sign Up"}</h1>
           <p className="text-muted-foreground mt-2">
-            Please sign in to access the admin panel
+            {isLogin 
+              ? "Please sign in to access the admin panel" 
+              : "Create an admin account to get started"}
           </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleAuth} className="space-y-4">
           <div className="space-y-2">
             <Input
               type="email"
@@ -80,8 +99,20 @@ const Auth = () => {
             className="w-full"
             disabled={loading}
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Processing..." : (isLogin ? "Sign In" : "Sign Up")}
           </Button>
+
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
+              {isLogin 
+                ? "Don't have an account? Sign up" 
+                : "Already have an account? Sign in"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
