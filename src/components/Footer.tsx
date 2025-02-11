@@ -88,7 +88,7 @@ export const Footer = () => {
                 <Mail className="text-primary shrink-0" size={20} />
                 <p className="text-gray-300">info@komsat.com</p>
               </div>
-              <Button className="w-full">Get in Touch</Button>
+              <Button onClick={() => window.location.hash = 'contact'} className="w-full">Get in Touch</Button>
             </div>
           </div>
         </div>
