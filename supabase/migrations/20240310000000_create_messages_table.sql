@@ -21,3 +21,9 @@ WITH CHECK (true);
 CREATE POLICY "Only authenticated users can view messages" ON messages
 FOR SELECT TO authenticated
 USING (true);
+
+-- Allow authenticated users to update messages
+CREATE POLICY "Allow authenticated users to update messages" ON messages
+FOR UPDATE TO authenticated
+USING (true)
+WITH CHECK (true);
