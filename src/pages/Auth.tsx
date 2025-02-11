@@ -14,6 +14,19 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  const checkAdminRole = async () => {
+    const { data, error } = await supabase.rpc('has_role', {
+      role: 'admin'
+    });
+    
+    if (error) {
+      console.error('Error checking admin role:', error);
+      return false;
+    }
+    
+    return data;
+  };
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -21,12 +34,21 @@ const Auth = () => {
     try {
       if (isLogin) {
         // Login
-        const { error } = await supabase.auth.signInWithPassword({
+        const { error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
 
-        if (error) throw error;
+        if (signInError) throw signInError;
+
+        // Check if user has admin role
+        const isAdmin = await checkAdminRole();
+        
+        if (!isAdmin) {
+          // Sign out if not admin
+          await supabase.auth.signOut();
+          throw new Error("Access denied. Only administrators can login.");
+        }
 
         toast({
           title: "Success",
@@ -35,18 +57,12 @@ const Auth = () => {
 
         navigate("/admin");
       } else {
-        // Sign up
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-        });
-
-        if (error) throw error;
-
         toast({
-          title: "Success",
-          description: "Account created successfully. Please check your email for verification.",
+          variant: "destructive",
+          title: "Error",
+          description: "New user registration is disabled. Please contact an administrator.",
         });
+        return;
       }
     } catch (error: any) {
       toast({
@@ -63,11 +79,9 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="max-w-md w-full p-8 space-y-6 bg-card rounded-lg shadow-lg">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Admin {isLogin ? "Login" : "Sign Up"}</h1>
+          <h1 className="text-2xl font-bold">Admin Login</h1>
           <p className="text-muted-foreground mt-2">
-            {isLogin 
-              ? "Please sign in to access the admin panel" 
-              : "Create an admin account to get started"}
+            Please sign in to access the admin panel
           </p>
         </div>
 
@@ -99,20 +113,8 @@ const Auth = () => {
             className="w-full"
             disabled={loading}
           >
-            {loading ? "Processing..." : (isLogin ? "Sign In" : "Sign Up")}
+            {loading ? "Processing..." : "Sign In"}
           </Button>
-
-          <div className="text-center mt-4">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-muted-foreground hover:text-primary"
-            >
-              {isLogin 
-                ? "Don't have an account? Sign up" 
-                : "Already have an account? Sign in"}
-            </button>
-          </div>
         </form>
       </div>
     </div>
