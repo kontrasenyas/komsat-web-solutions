@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -28,6 +29,7 @@ const Admin = () => {
   const [authChecking, setAuthChecking] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -36,16 +38,41 @@ const Admin = () => {
       setAuthChecking(false);
       
       if (!session) {
-        toast({
-          variant: "destructive",
-          title: "Authentication Required",
-          description: "Please log in to access the admin panel.",
-        });
+        navigate("/auth");
       }
     };
 
     checkAuth();
-  }, []);
+
+    // Subscribe to auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsAuthenticated(!!session);
+      if (!session) {
+        navigate("/auth");
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Success",
+        description: "Logged out successfully",
+      });
+      navigate("/auth");
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to log out",
+      });
+    }
+  };
 
   const fetchMessages = async () => {
     try {
@@ -112,14 +139,7 @@ const Admin = () => {
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="container mx-auto p-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
-          <p>Please log in to access the admin panel.</p>
-        </div>
-      </div>
-    );
+    return null; // Will redirect to /auth
   }
 
   if (loading) {
@@ -132,7 +152,13 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard - Messages</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Admin Dashboard - Messages</h1>
+        <Button onClick={handleLogout} variant="outline">
+          Logout
+        </Button>
+      </div>
+      
       {messages.length === 0 ? (
         <p className="text-center text-gray-500">No messages found.</p>
       ) : (
