@@ -101,6 +101,30 @@ const Admin = () => {
     }
   }, [isAuthenticated]);
 
+  // Set up real-time subscription for message updates
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const channel = supabase
+      .channel('messages-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'messages'
+        },
+        () => {
+          fetchMessages(); // Refresh messages when changes occur
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [isAuthenticated]);
+
   const markAsRead = async (id: string) => {
     try {
       const { error } = await supabase
@@ -110,6 +134,7 @@ const Admin = () => {
 
       if (error) throw error;
 
+      // Update local state only after successful database update
       setMessages((prevMessages) =>
         prevMessages.map((msg) =>
           msg.id === id ? { ...msg, is_read: true } : msg
