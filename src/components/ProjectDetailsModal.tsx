@@ -79,7 +79,7 @@ export const ProjectDetailsModal = ({
                   </div>
                 )}
 
-                <div className="flex gap-4 pt-4">
+                {/* <div className="flex gap-4 pt-4">
                   {project.details.demoUrl && (
                     <Button variant="outline" onClick={() => window.open(project.details.demoUrl, '_blank')}>
                       <Eye className="mr-2 h-4 w-4" />
@@ -92,7 +92,7 @@ export const ProjectDetailsModal = ({
                       View Code
                     </Button>
                   )}
-                </div>
+                </div> */}
               </div>
             )}
           </DialogDescription>
