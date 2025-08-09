@@ -61,7 +61,7 @@ export const Contact = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
             <p className="text-muted-foreground">
-              Ready to transform your business? Let's talk about your project
+              Ready to transform your business? Let's talk about your project..
             </p>
           </div>
 
